@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 1 - Form SSR</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <h1>Task 1: HTML + Express + EJS</h1>
+        <p>Fill the form and submit to see server-side rendering.</p>
+
+        <% if (error) { %>
+            <div class="alert">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <form action="/submit" method="POST" class="card">
+                    <label>
+                        Name
+                        <input type="text" name="name" value="<%= formData?.name || '' %>" />
+                    </label>
+
+                    <label>
+                        Email
+                        <input type="email" name="email" value="<%= formData?.email || '' %>" />
+                    </label>
+
+                    <label>
+                        Message
+                        <textarea name="message" rows="4"><%= formData?.message || '' %></textarea>
+                    </label>
+
+                    <button type="submit">Submit</button>
+                </form>
+    </main>
+</body>
+
+</html>
