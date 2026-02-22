@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submissions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f6f7fb;
+            color: #111;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .link {
+            display: inline-block;
+            margin-top: 12px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 800;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <h1>Stored Submissions</h1>
+            <p class="small">Temporary server-side storage (in-memory). Restarting server clears data.</p>
+
+            <% if (submissions.length===0) { %>
+                <p>No submissions yet.</p>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% submissions.forEach((s, idx)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= idx + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= s.name %>
+                                    </td>
+                                    <td>
+                                        <%= s.email %>
+                                    </td>
+                                    <td>
+                                        <%= s.phone %>
+                                    </td>
+                                    <td>
+                                        <%= s.createdAt %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+
+                        <a class="link" href="/">← Back to form</a>
+        </div>
+    </main>
+</body>
+
+</html>

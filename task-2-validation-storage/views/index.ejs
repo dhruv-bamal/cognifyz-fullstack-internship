@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 2 - Validation + Temp Storage</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f6f7fb;
+            color: #111;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+        }
+
+        p {
+            margin: 0 0 16px;
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            gap: 12px;
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #111;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .alert {
+            background: #ffe0e0;
+            border: 1px solid #ffb3b3;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ok {
+            background: #e8fff0;
+            border: 1px solid #a7f3c0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .link {
+            display: inline-block;
+            margin-top: 12px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 800;
+        }
+
+        .errorText {
+            color: #b00020;
+            font-size: 13px;
+            margin-top: -6px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+            <h1>Task 2: Client + Server Validation</h1>
+            <p class="small">Includes inline CSS, inline JS validation, server-side validation, and temporary
+                server-side storage.</p>
+
+            <% if (error) { %>
+                <div class="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+
+
+                    <form id="signupForm" action="/register" method="POST" novalidate>
+                        <label>
+                            Name
+                            <input id="name" type="text" name="name" value="<%= formData?.name || '' %>" />
+                        </label>
+                        <div id="nameErr" class="errorText"></div>
+
+                        <label>
+                            Email
+                            <input id="email" type="email" name="email" value="<%= formData?.email || '' %>" />
+                        </label>
+                        <div id="emailErr" class="errorText"></div>
+
+                        <label>
+                            Phone (10 digits)
+                            <input id="phone" type="text" name="phone" value="<%= formData?.phone || '' %>" />
+                        </label>
+                        <div id="phoneErr" class="errorText"></div>
+
+                        <label>
+                            Password
+                            <input id="password" type="password" name="password" />
+                        </label>
+                        <div id="passwordErr" class="errorText"></div>
+
+                        <label>
+                            Confirm Password
+                            <input id="confirmPassword" type="password" name="confirmPassword" />
+                        </label>
+                        <div id="confirmErr" class="errorText"></div>
+
+                        <button type="submit">Register</button>
+                    </form>
+
+                    <a class="link" href="/submissions">View submissions →</a>
+        </div>
+    </main>
+
+
+    <script>
+        const form = document.getElementById("signupForm");
+
+        const nameEl = document.getElementById("name");
+        const emailEl = document.getElementById("email");
+        const phoneEl = document.getElementById("phone");
+        const passwordEl = document.getElementById("password");
+        const confirmEl = document.getElementById("confirmPassword");
+
+        const nameErr = document.getElementById("nameErr");
+        const emailErr = document.getElementById("emailErr");
+        const phoneErr = document.getElementById("phoneErr");
+        const passwordErr = document.getElementById("passwordErr");
+        const confirmErr = document.getElementById("confirmErr");
+
+        function isValidEmail(email) {
+            return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email);
+        }
+
+        function isValidPhone(phone) {
+            return /^[0-9]{10}$/.test(phone);
+        }
+
+        function isStrongPassword(pw) {
+
+            return /^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$/.test(pw);
+        }
+
+        function clearErrors() {
+            nameErr.textContent = "";
+            emailErr.textContent = "";
+            phoneErr.textContent = "";
+            passwordErr.textContent = "";
+            confirmErr.textContent = "";
+        }
+
+        form.addEventListener("submit", (e) => {
+            clearErrors();
+
+            const name = nameEl.value.trim();
+            const email = emailEl.value.trim();
+            const phone = phoneEl.value.trim();
+            const password = passwordEl.value;
+            const confirmPassword = confirmEl.value;
+
+            let hasError = false;
+
+            if (!name) { nameErr.textContent = "Name is required."; hasError = true; }
+
+            if (!email) {
+                emailErr.textContent = "Email is required.";
+                hasError = true;
+            } else if (!isValidEmail(email)) {
+                emailErr.textContent = "Enter a valid email.";
+                hasError = true;
+            }
+
+            if (!phone) {
+                phoneErr.textContent = "Phone is required.";
+                hasError = true;
+            } else if (!isValidPhone(phone)) {
+                phoneErr.textContent = "Phone must be exactly 10 digits.";
+                hasError = true;
+            }
+
+            if (!password) {
+                passwordErr.textContent = "Password is required.";
+                hasError = true;
+            } else if (!isStrongPassword(password)) {
+                passwordErr.textContent = "Min 8 chars and must include letters + numbers.";
+                hasError = true;
+            }
+
+            if (!confirmPassword) {
+                confirmErr.textContent = "Please confirm your password.";
+                hasError = true;
+            } else if (password !== confirmPassword) {
+                confirmErr.textContent = "Passwords do not match.";
+                hasError = true;
+            }
+
+            if (hasError) e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
