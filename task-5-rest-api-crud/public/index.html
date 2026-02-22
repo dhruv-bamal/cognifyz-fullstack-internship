@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task 5 - Notes CRUD API</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <header class="header">
+            <h1>Task 5: Notes Manager (CRUD)</h1>
+            <p>Frontend consumes your Express REST API.</p>
+        </header>
+
+        <section class="card">
+            <h2 id="formTitle">Create Note</h2>
+
+            <div id="alert" class="alert hidden"></div>
+
+            <form id="noteForm">
+                <label>
+                    Title
+                    <input id="title" type="text" placeholder="e.g. Internship Task 5" />
+                </label>
+
+                <label>
+                    Content
+                    <textarea id="content" rows="4" placeholder="Write something..."></textarea>
+                </label>
+
+                <div class="actions">
+                    <button type="submit" id="submitBtn">Add Note</button>
+                    <button type="button" id="cancelBtn" class="secondary hidden">Cancel Edit</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card">
+            <div class="listHeader">
+                <h2>All Notes</h2>
+                <button id="refreshBtn" class="secondary">Refresh</button>
+            </div>
+
+            <div id="notes" class="notes"></div>
+        </section>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

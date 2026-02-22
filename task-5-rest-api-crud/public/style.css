@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f6f7fb;
+    color: #111;
+}
+
+.container {
+    max-width: 820px;
+    margin: 36px auto;
+    padding: 0 16px;
+}
+
+.header h1 {
+    margin: 0 0 6px;
+}
+
+.header p {
+    margin: 0 0 18px;
+    color: #444;
+}
+
+.card {
+    background: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    margin-bottom: 16px;
+}
+
+label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+input,
+textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #111;
+    color: #fff;
+    font-weight: 800;
+}
+
+button.secondary {
+    background: #f0f0f0;
+    color: #111;
+}
+
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.notes {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.note {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 12px;
+    background: #fafafa;
+    display: grid;
+    gap: 8px;
+}
+
+.note h3 {
+    margin: 0;
+}
+
+.note p {
+    margin: 0;
+    color: #333;
+}
+
+.note .meta {
+    font-size: 12px;
+    color: #666;
+}
+
+.note .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+}
+
+.alert.error {
+    background: #ffe0e0;
+    border-color: #ffb3b3;
+}
+
+.alert.success {
+    background: #e8fff0;
+    border-color: #a7f3c0;
+}
+
+.hidden {
+    display: none;
+}
